@@ -1,0 +1,7 @@
+cryptography
+flask
+cryptography
+pynput
+requests
+beautifulsoup4
+openai

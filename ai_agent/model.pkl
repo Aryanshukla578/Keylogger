@@ -1,0 +1,32 @@
+# train_model.py
+import pickle
+import numpy as np
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+
+# --- STEP 1: Simulate dataset (replace with real behavior data if available)
+# X = [time_on_page, click_count, unusual_inputs, repeated_paths]
+X = np.array([
+    [5, 1, 0, 0],    # Normal user
+    [120, 20, 1, 1], # Suspicious bot
+    [10, 3, 0, 0],   # Normal user
+    [200, 50, 1, 1], # Hacker
+    [3, 0, 0, 0],    # Normal
+    [180, 35, 1, 1], # Attacker
+])
+
+# y = labels (0 = normal, 1 = threat)
+y = np.array([0, 1, 0, 1, 0, 1])
+
+# --- STEP 2: Train-test split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# --- STEP 3: Train model
+model = RandomForestClassifier(n_estimators=50, random_state=42)
+model.fit(X_train, y_train)
+
+# --- STEP 4: Save model
+with open("model.pkl", "wb") as f:
+    pickle.dump(model, f)
+
+print("✅ model.pkl generated successfully.")
