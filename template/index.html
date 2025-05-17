@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Keylogger Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background: #212121;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .container {
+            padding: 1rem;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #444;
+        }
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .option {
+            flex: 1 1 45%;
+            background: white;
+            margin: 0.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .option:hover {
+            background: #e0f7fa;
+        }
+
+        .logs {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            max-height: 400px;
+            overflow-y: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .logs ul {
+            padding-left: 20px;
+        }
+
+        .logs li {
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 600px) {
+            .option {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>🕵️ ZeroTrace: Keylogger Dashboard</h2>
+    </header>
+
+    <div class="container">
+        <h1>Actions</h1>
+        <div class="options">
+            <div class="option" onclick="alert('Export not implemented yet.')">📤 Export Logs</div>
+            <div class="option" onclick="alert('Search not implemented yet.')">🔍 Search Logs</div>
+            <div class="option" onclick="alert('Log cleared!')">🗑 Clear Logs</div>
+            <div class="option" onclick="alert('Encryption toggle not implemented.')">🔐 Toggle Encryption</div>
+            <div class="option" onclick="alert('Log Monitor started.')">📡 Start Live Monitor</div>
+        </div>
+
+        <div class="logs">
+            <h3>📄 Keystroke Logs</h3>
+            <ul>
+                {% for line in logs %}
+                    <li>{{ line }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
