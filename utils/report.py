@@ -4,12 +4,15 @@ import base64
 from cryptography.fernet import Fernet
 from datetime import datetime
 
-# Path to save reports
+# Paths
 REPORTS_DIR = "zerotrace/reports"
 KEY_FILE = "zerotrace/utils/.reportkey"
 
-# Generate or load encryption key
+# Load or generate encryption key
 def load_key():
+    # Ensure the directory for the key file exists
+    os.makedirs(os.path.dirname(KEY_FILE), exist_ok=True)
+
     if not os.path.exists(KEY_FILE):
         key = Fernet.generate_key()
         with open(KEY_FILE, "wb") as f:
@@ -23,8 +26,8 @@ fernet = load_key()
 
 # Save encrypted report
 def save_report(data: dict, report_name=None):
-    if not os.path.exists(REPORTS_DIR):
-        os.makedirs(REPORTS_DIR)
+    # Ensure the reports directory exists
+    os.makedirs(REPORTS_DIR, exist_ok=True)
 
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     filename = report_name or f"threat_report_{timestamp}.enc"
@@ -40,7 +43,7 @@ def save_report(data: dict, report_name=None):
     except Exception as e:
         print(f"[!] Failed to save encrypted report: {e}")
 
-# (Optional) Read and decrypt report for debugging
+# Read and decrypt report
 def read_report(file_path):
     try:
         with open(file_path, "rb") as f:
@@ -51,7 +54,7 @@ def read_report(file_path):
         print(f"[!] Error reading report: {e}")
         return None
 
-# Example usage (for debugging)
+# Debug usage
 if __name__ == "__main__":
     sample_data = {
         "module": "honeypot",
