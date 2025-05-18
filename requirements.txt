@@ -5,3 +5,7 @@ pynput
 requests
 beautifulsoup4
 openai
+streamlit
+cryptography
+streamlit
+cryptography
